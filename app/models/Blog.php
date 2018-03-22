@@ -9,6 +9,6 @@ class Blog extends Model
     //
     public function author()
     {
-        return $this->hasOne('App\models\User', 'id', 'user_id');
+        return $this->hasOne('App\User', 'id', 'user_id');
     }
 }

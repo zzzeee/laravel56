@@ -9,6 +9,7 @@
         "barryvdh/laravel-debugbar": "^3.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
+        "laravel/passport": "^5.0",
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
@@ -27,7 +28,7 @@
             "App\\": "app/"
         },
         "files": [
-            "app/helpers/common_helper"
+            "app/helpers/common_helper.php"
         ]
     },
     "autoload-dev": {
