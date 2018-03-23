@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+use App\User;
+use App\Http\Resources\User as UserResource;
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -23,4 +26,9 @@ Route::post('register', 'API\UserController@register');
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('details', 'API\UserController@details');
+    Route::get('blog', 'API\BlogController@index');
+    
+    Route::get('user', function () {
+        return new UserResource(User::find(1));
+    });
 });
