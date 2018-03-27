@@ -12,12 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/mobile', function() {
     return view('mobile');
 });
+
+Route::get('/mobile/{a?}', function () {
+    return view('mobile');
+});
+
+Route::get('/mobile/{a?}/{b?}', function () {
+    return view('mobile');
+});
+
+
+Route::resource('posts', 'PostController');
 
 Auth::routes();
 

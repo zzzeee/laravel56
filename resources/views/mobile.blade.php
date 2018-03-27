@@ -8,11 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>手机网站</title>
 
     <!-- Scripts -->
     @if( config('app.debug') )
-        <script src="http://localhost:8097"></script>
+        {{--  <script src="http://localhost:8097"></script>  --}}
     @endif
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
