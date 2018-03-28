@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Repositories\Blog;
+use App\Repositories\BlogRepository;
 
 class HomeController extends Controller
 {
+    /** @var  BlogRepository BlogRepository */
+    protected $blogRepository;
+    
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(BlogRepository $blogRepository)
     {
         $this->middleware('auth');
+        $this->blogRepository = $blogRepository;
     }
 
     /**
@@ -24,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::with('author')->orderBy('created_at', 'desc')->paginate(2);
+        $blogs = $this->blogRepository->getOnceBlogList();
         // dd($blogs);
 
         return view('home', compact('blogs'));

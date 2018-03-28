@@ -9,7 +9,10 @@ import ReactDOM from 'react-dom';
 // import Example from './router/nomatch';
 // import Example from './router/recursive';
 // import Example from './router/sidebar';
-import Example from './router/animated';
+// import Example from './router/animated';
+// import Example from './router/static';
+import Example from './router/model';
+
 
 if (document.getElementById('example')) {
     ReactDOM.render(<Example />, document.getElementById('example'));
