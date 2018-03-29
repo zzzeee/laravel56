@@ -46,11 +46,11 @@ class ModalSwitch extends React.Component {
     return (
       <div>
         <Switch location={isModal ? this.previousLocation : location}>
-          <Route exact path="/mobile/" component={Home} />
-          <Route path="/mobile/gallery" component={Gallery} />
-          <Route path="/mobile/img/:id" component={ImageView} />
+          <Route exact path="/" component={Home} />
+          <Route path="/gallery" component={Gallery} />
+          <Route path="/img/:id" component={ImageView} />
         </Switch>
-        {isModal ? <Route path="/mobile/img/:id" component={Modal} /> : null}
+        {isModal ? <Route path="/img/:id" component={Modal} /> : null}
       </div>
     );
   }
@@ -86,14 +86,14 @@ const Image = ({ color }) => (
 
 const Home = () => (
   <div>
-    <Link to="/mobile/gallery">Visit the Gallery</Link>
+    <Link to="/gallery">Visit the Gallery</Link>
     <h2>Featured Images</h2>
     <ul>
       <li>
-        <Link to="/mobile/img/2">Tomato</Link>
+        <Link to="/img/2">Tomato</Link>
       </li>
       <li>
-        <Link to="/mobile/img/4">Crimson</Link>
+        <Link to="/img/4">Crimson</Link>
       </li>
     </ul>
   </div>
@@ -105,7 +105,7 @@ const Gallery = () => (
       <Link
         key={i.id}
         to={{
-          pathname: `/mobile/img/${i.id}`,
+          pathname: `/img/${i.id}`,
           // this is the trick!
           state: { modal: true }
         }}
@@ -174,8 +174,15 @@ const Modal = ({ match, history }) => {
   );
 };
 
+const getConfirmation = (message, callback) => {
+    const allowTransition = window.confirm(message)
+}
+
 const ModalGallery = () => (
-  <Router>
+  <Router 
+    basename="/mobile"
+    getUserConfirmation={getConfirmation('welcome!!!', null)}
+  >
     <Route component={ModalSwitch} />
   </Router>
 );

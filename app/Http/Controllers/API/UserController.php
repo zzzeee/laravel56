@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
@@ -16,7 +17,8 @@ class UserController extends ApiController
         if(empty(request('email')) || empty(request('password'))) {
             $this->set_error('帐号或密码不能为空!');
         }else if(Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $this->set_data('token', Auth::user()->createToken('MyApp')->accessToken);
+            $createToken = Auth::user()->createToken('MyApp');
+            $this->set_data('token', $createToken->accessToken);
             $this->set_success('登录成功!');
         }else {
             $this->set_error('帐号或密码错误!');

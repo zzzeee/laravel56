@@ -1,33 +1,53 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Prompt } from "react-router-dom";
 
+import { matchPath } from 'react-router'
+const match = matchPath('/users/123/ss', {
+  path: '/users/:id',
+  exact: false,
+  strict: false
+});
+console.log(match);
+
 const PreventingTransitionsExample = () => (
-  <Router>
+  <Router basename="/mobile">
     <div>
       <ul>
         <li>
-          <Link to="/mobile">Form</Link>
+          <Link to="/">Form</Link>
         </li>
         <li>
-          <Link to="/mobile/one">One</Link>
+          <Link to="/one">One</Link>
         </li>
         <li>
-          <Link to="/mobile/two">Two</Link>
+          <Link to="/two">Two</Link>
         </li>
       </ul>
-      <Route path="/mobile" exact component={Form} />
-      <Route path="/mobile/one" render={() => <h3>One</h3>} />
-      <Route path="/mobile/two" render={() => {
+      <hr />
+      <Route path="/" exact component={Form} />
+      <Route path="/one" render={() => {
+        return (
+            <div>
+              <h3>One</h3>
+              <Prompt
+                  when={true}
+                  message={location =>
+                    `Are you sure you want to go to ${location.pathname}`
+                  }
+              />
+            </div>
+        );
+      }} />
+      <Route path="/two" render={() => {
           return (
               <div>
                 <h3>Two</h3>
-                {/* 一个页面只支持一个Prompt(提示)
                 <Prompt
                     when={true}
                     message={location =>
-                    `Are you sure you want to go to ${location.pathname}`
+                      `Are you sure you want to go to ${location.pathname}`
                     }
-                /> */}
+                />
               </div>
           );
       }} />
@@ -57,7 +77,7 @@ class Form extends React.Component {
         }}
       >
         <Prompt
-          when={isBlocking}
+          when={false}
           message={location =>
             `Are you sure you want to go to ${location.pathname}`
           }

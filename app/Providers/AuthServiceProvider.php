@@ -29,8 +29,5 @@ class AuthServiceProvider extends ServiceProvider
 
         //
         Passport::routes();
-        //设置token有效期
-        Passport::tokensExpireIn(Carbon::now()->addDays(15));
-        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
     }
 }
