@@ -20,7 +20,18 @@ class BlogRepository
     }
 
     //
-    public function getOnceBlogList($sort = 'created_at', $order = 'desc', $limit = 2) {
+    public function getOnceBlogList($sort = 'created_at', $order = 'desc', $limit = 6) 
+    {
         return Blog::with('author')->orderBy($sort, $order)->paginate($limit);
+    }
+
+    public function create_blog($title, $content, $author)
+    {
+        $blog = array(
+            'title' => $title,
+            'content' => $content,
+            'user_id' => $author,
+        );
+        return Blog::create($blog);
     }
 }

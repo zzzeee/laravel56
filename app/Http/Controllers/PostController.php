@@ -3,10 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog;
+use App\Repositories\BlogRepository;
+use App\Http\Requests\StoreBlogPost;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    /** @var  BlogRepository BlogRepository */
+    protected $blogRepository;
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(BlogRepository $blogRepository)
+    {
+        $this->blogRepository = $blogRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +29,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        exit(Blog::find(1));
+        $blogs = $this->blogRepository->getOnceBlogList();
+        return view('posts', compact('blogs'));
     }
 
     /**
@@ -26,6 +41,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('create');
     }
 
     /**
@@ -34,9 +50,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogPost $request)
     {
-        //
+        $user = Auth::user();
+        // dd($user);
+
+        $this->blogRepository->create_blog($request->title, $request->content, $user->id);
+        return redirect('posts');
     }
 
     /**

@@ -1,14 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Prompt } from "react-router-dom";
 
-import { matchPath } from 'react-router'
-const match = matchPath('/users/123/ss', {
-  path: '/users/:id',
-  exact: false,
-  strict: false
-});
-console.log(match);
-
 const PreventingTransitionsExample = () => (
   <Router basename="/mobile">
     <div>

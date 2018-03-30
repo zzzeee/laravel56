@@ -19,8 +19,9 @@ class BlogResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
-            'user_id' => new UserResource(User::find($this->user_id)),
-            'created_at' => (String)$this->created_at,
+            // 'user_id' => new UserResource(User::find($this->user_id)),
+            'author' => $this->author,
+            'created_at' => $this->created_at->toDateTimeString(),
         ];
     }
 }
